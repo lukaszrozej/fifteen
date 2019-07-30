@@ -1,0 +1,11 @@
+{
+  "name": "fifteen",
+  "version": "1.0.0",
+  "description": "Fifteen puzzle game",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Łukasz Rożej",
+  "license": "ISC"
+}
