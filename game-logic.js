@@ -3,6 +3,7 @@ const LEFT = { x: -1, y: 0 }
 const UP = { x: 0, y: -1 }
 const DOWN = { x: 0, y: 1 }
 const TILE = tile => tile
+const SHUFFLE = 'shuffle'
 
 const type = action => {
   switch (typeof action) {
@@ -76,4 +77,4 @@ const newState = (currentState, action) => {
   return currentState
 }
 
-const initialState = () => shuffle([...Array(16).keys()])
+const initialState = () => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0]
