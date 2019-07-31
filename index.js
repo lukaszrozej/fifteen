@@ -23,9 +23,13 @@ const keyboardActions = Rx.Observable
   .map(e => keyMapping[e.keyCode])
 
 const mouseActions = Rx.Observable
-  .fromEvent(board, 'click')
-  .filter(e => e.target.classList.contains('tile'))
-  .map(e => parseInt(e.target.id))
+  .fromEvent(document, 'click')
+  .filter(e => e.target.classList.contains('clickable'))
+  .map(e =>
+    e.target.classList.contains('tile')
+      ? parseInt(e.target.id)
+      : SHUFFLE
+  )
 
 const actions = Rx.Observable.merge(keyboardActions, mouseActions)
 
@@ -35,7 +39,7 @@ const gameStates = actions.scan(newState, initialState())
 
 const createTile = i => {
   const tile = document.createElement('div')
-  tile.classList.add('tile')
+  tile.classList.add('tile', 'clickable')
   tile.textContent = i > 0 ? i : ''
   tile.id = i
   return tile
