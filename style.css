@@ -1,0 +1,17 @@
+.board {
+  margin: auto;
+  width: 480px;
+  height: 480px;
+  background: black;
+  position: relative;
+}
+
+.tile {
+  width: 32px;
+  height: 32px;
+  background: green;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: all 0.4s;
+}
