@@ -26,7 +26,7 @@ const mouseActions = fromEvent(document, 'click')
     filter(e => e.target.classList.contains('clickable')),
     map(e =>
       e.target.classList.contains('tile')
-        ? parseInt(e.target.id)
+        ? TILE(parseInt(e.target.id))
         : SHUFFLE
     )
   )
