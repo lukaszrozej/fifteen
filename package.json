@@ -2,7 +2,7 @@
   "name": "fifteen",
   "version": "1.0.0",
   "description": "Fifteen puzzle game",
-  "main": "index.html",
+  "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
