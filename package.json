@@ -14,5 +14,10 @@
   },
   "dependencies": {
     "rxjs": "^6.5.2"
+  },
+  "standard": {
+    "ignore": [
+      "/dist/main.js"
+    ]
   }
 }
