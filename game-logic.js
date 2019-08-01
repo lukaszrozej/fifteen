@@ -4,12 +4,14 @@ const UP = { x: 0, y: -1 }
 const DOWN = { x: 0, y: 1 }
 const TILE = tile => tile
 const SHUFFLE = 'shuffle'
+const NONE = undefined
 
 const type = action => {
   switch (typeof action) {
     case 'object': return 'direction'
     case 'number': return 'tile'
-    default: return 'shuffle'
+    case 'string': return 'shuffle'
+    default: return 'none'
   }
 }
 

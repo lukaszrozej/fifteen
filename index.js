@@ -31,7 +31,11 @@ const mouseActions = Rx.Observable
       : SHUFFLE
   )
 
-const actions = Rx.Observable.merge(keyboardActions, mouseActions)
+const windowActions = Rx.Observable
+  .fromEvent(window, 'resize')
+  .map(e => NONE)
+
+const actions = Rx.Observable.merge(keyboardActions, mouseActions, windowActions)
 
 const gameStates = actions.scan(newState, initialState())
 
@@ -54,8 +58,8 @@ tiles.forEach(tile => board.appendChild(tile))
 const show = state => {
   state.forEach((tile, index) => {
     if (tile === 0) return
-    const top = Math.floor(index / 4) * 40
-    const left = (index % 4) * 40
+    const top = Math.floor(index / 4) * Math.floor(board.offsetHeight * 0.24) + Math.floor(board.offsetHeight * 0.04)
+    const left = (index % 4) * Math.floor(board.offsetWidth * 0.24) + Math.floor(board.offsetHeight * 0.04)
     tiles[tile-1].style.top = `${top}px`
     tiles[tile-1].style.left = `${left}px`
   })
