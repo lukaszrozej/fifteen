@@ -15,25 +15,11 @@ const keyMapping = {
   40: DOWN
 }
 
-// const keyboardActions = Observable
-//   .fromEvent(document, 'keydown')
-//   .filter(e => [32, 37, 38, 39, 40].includes(e.keyCode))
-//   .map(e => keyMapping[e.keyCode])
-
 const keyboardActions = fromEvent(document, 'keydown')
   .pipe(
     filter(e => [32, 37, 38, 39, 40].includes(e.keyCode)),
     map(e => keyMapping[e.keyCode])
   )
-
-// const mouseActions = Observable
-//   .fromEvent(document, 'click')
-//   .filter(e => e.target.classList.contains('clickable'))
-//   .map(e =>
-//     e.target.classList.contains('tile')
-//       ? parseInt(e.target.id)
-//       : SHUFFLE
-//   )
 
 const mouseActions = fromEvent(document, 'click')
   .pipe(
@@ -44,10 +30,6 @@ const mouseActions = fromEvent(document, 'click')
         : SHUFFLE
     )
   )
-
-// const windowActions = Observable
-//   .fromEvent(window, 'resize')
-//   .map(e => NONE)
 
 const windowActions = fromEvent(window, 'resize')
   .pipe(map(e => NONE))
