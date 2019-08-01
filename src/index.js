@@ -1,3 +1,8 @@
+// import Rx from 'rxjs/Rx'
+import { fromEvent, merge } from 'rxjs'
+import { filter, map, scan } from 'rxjs/operators'
+import { RIGHT, LEFT, UP, DOWN, TILE, SHUFFLE, NONE, initialState, newState } from './game-logic.js'
+
 const board = document.querySelector('.board')
 
 // Inputs
@@ -10,27 +15,46 @@ const keyMapping = {
   40: DOWN
 }
 
-const keyboardActions = Rx.Observable
-  .fromEvent(document, 'keydown')
-  .filter(e => [32, 37, 38, 39, 40].includes(e.keyCode))
-  .map(e => keyMapping[e.keyCode])
+// const keyboardActions = Observable
+//   .fromEvent(document, 'keydown')
+//   .filter(e => [32, 37, 38, 39, 40].includes(e.keyCode))
+//   .map(e => keyMapping[e.keyCode])
 
-const mouseActions = Rx.Observable
-  .fromEvent(document, 'click')
-  .filter(e => e.target.classList.contains('clickable'))
-  .map(e =>
-    e.target.classList.contains('tile')
-      ? parseInt(e.target.id)
-      : SHUFFLE
+const keyboardActions = fromEvent(document, 'keydown')
+  .pipe(
+    filter(e => [32, 37, 38, 39, 40].includes(e.keyCode)),
+    map(e => keyMapping[e.keyCode])
   )
 
-const windowActions = Rx.Observable
-  .fromEvent(window, 'resize')
-  .map(e => NONE)
+// const mouseActions = Observable
+//   .fromEvent(document, 'click')
+//   .filter(e => e.target.classList.contains('clickable'))
+//   .map(e =>
+//     e.target.classList.contains('tile')
+//       ? parseInt(e.target.id)
+//       : SHUFFLE
+//   )
 
-const actions = Rx.Observable.merge(keyboardActions, mouseActions, windowActions)
+const mouseActions = fromEvent(document, 'click')
+  .pipe(
+    filter(e => e.target.classList.contains('clickable')),
+    map(e =>
+      e.target.classList.contains('tile')
+        ? parseInt(e.target.id)
+        : SHUFFLE
+    )
+  )
 
-const gameStates = actions.scan(newState, initialState())
+// const windowActions = Observable
+//   .fromEvent(window, 'resize')
+//   .map(e => NONE)
+
+const windowActions = fromEvent(window, 'resize')
+  .pipe(map(e => NONE))
+
+const actions = merge(keyboardActions, mouseActions, windowActions)
+
+const gameStates = actions.pipe(scan(newState, initialState()))
 
 // Output
 
