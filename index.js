@@ -1,10 +1,3 @@
-const showC = s => {
-  console.log(s.slice(0, 4))
-  console.log(s.slice(4, 8))
-  console.log(s.slice(8, 12))
-  console.log(s.slice(12))
-}
-
 const board = document.querySelector('.board')
 
 // Inputs
@@ -60,8 +53,8 @@ const show = state => {
     if (tile === 0) return
     const top = Math.floor(index / 4) * Math.floor(board.offsetHeight * 0.24) + Math.floor(board.offsetHeight * 0.04)
     const left = (index % 4) * Math.floor(board.offsetWidth * 0.24) + Math.floor(board.offsetHeight * 0.04)
-    tiles[tile-1].style.top = `${top}px`
-    tiles[tile-1].style.left = `${left}px`
+    tiles[tile - 1].style.top = `${top}px`
+    tiles[tile - 1].style.left = `${left}px`
   })
 }
 
